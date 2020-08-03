@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "89980109274",
+    "firebase_url": "https://shop-e-mania.firebaseio.com",
+    "project_id": "shop-e-mania",
+    "storage_bucket": "shop-e-mania.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89980109274:android:6ff3ec5022ddd88ff740e3",
+        "android_client_info": {
+          "package_name": "com.shopemania.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89980109274-0v5sng4d4g2l7kts842ijkndlbugk9rf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzKEJQj2ybDBniLVOtPQP55R3YahNUkMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89980109274-0v5sng4d4g2l7kts842ijkndlbugk9rf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
