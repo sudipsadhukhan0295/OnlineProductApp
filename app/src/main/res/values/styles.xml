@@ -8,8 +8,31 @@
     </style>
 
     <style name="TextTitle" parent="AppTheme">
-        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:textSize">18sp</item>
 
+    </style>
+
+
+    <style name="circleImageView" parent="AppTheme">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/view_round_corner</item>
+    </style>
+
+    <style name="ButtonTheme" parent="AppTheme">
+        <item name="android:background">@drawable/view_button_selector</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ColdStart" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
 </resources>
