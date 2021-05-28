@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <com.shopemania.app.customview.Pinview
+        <com.mcsadhukhan.app.customview.Pinview
             android:id="@+id/et_otp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

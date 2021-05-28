@@ -9,7 +9,7 @@
 
         <variable
             name="activity"
-            type="com.shopemania.app.signup.SignUpActivity" />
+            type="com.mcsadhukhan.app.signup.SignUpActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -11,11 +11,11 @@
 
         <variable
             name="viewModel"
-            type="com.shopemania.app.login.LoginViewModel" />
+            type="com.mcsadhukhan.app.login.LoginViewModel" />
 
         <variable
             name="activity"
-            type="com.shopemania.app.login.LoginActivity" />
+            type="com.mcsadhukhan.app.login.LoginActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

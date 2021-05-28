@@ -1,79 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="product"
-            type="com.shopemania.app.model.Product" />
+            type="com.mcsadhukhan.app.model.Product" />
 
         <variable
             name="adapter"
-            type="com.shopemania.app.home.ProductListAdapter" />
+            type="com.mcsadhukhan.app.home.ProductListAdapter" />
+
         <import type="android.view.View" />
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_12dp"
         android:layout_marginVertical="@dimen/_8dp"
-        app:cardCornerRadius="@dimen/_8dp"
         android:onClick="@{()->adapter.onClick(product.imageUrl)}"
+        app:cardCornerRadius="@dimen/_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/image"
+                android:scaleType="fitXY"
                 app:imageUrl="@{product.imageUrl}"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="1"
-                app:layout_constraintWidth_percent=".2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent=".55"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="1" />
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{product.id}"
-                android:textSize="16sp"
+                android:layout_marginHorizontal="@dimen/_8dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="@{product.name}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Product Name" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:singleLine="true"
+                android:layout_marginHorizontal="@dimen/_8dp"
                 android:text="@{product.name}"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                tools:text="Product Description" />
 
             <TextView
+                android:id="@+id/tv_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{product.price}"
-                android:textSize="14sp"
+                android:singleLine="true"
+                android:layout_marginHorizontal="@dimen/_8dp"
+                android:layout_marginTop="@dimen/_4dp"
+                android:text="@{`Price: `+product.priceList[0].price +` per `+product.unit}"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:text="Product Price" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8dp"
+                android:singleLine="true"
+                android:layout_marginTop="@dimen/_4dp"
+                android:text="@{product.priceList[0].timeStamp}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_price"
+                tools:text="Last update on: " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8dp"
+                android:layout_marginVertical="@dimen/_4dp"
+                android:drawablePadding="@dimen/_4dp"
+                android:singleLine="true"
+                android:text="@{adapter.productEditEnable?`Edit product`:`See all price`}"
+                android:textAllCaps="true"
+                android:textSize="10sp"
+                app:drawableEndCompat="@drawable/ic_double_arrow_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                tools:text="price" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

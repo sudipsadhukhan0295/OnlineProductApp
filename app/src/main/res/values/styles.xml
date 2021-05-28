@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/noto_serif_regular</item>
     </style>
 
     <style name="TextTitle" parent="AppTheme">
@@ -12,10 +13,15 @@
 
     </style>
 
-
     <style name="circleImageView" parent="AppTheme">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TextAppearanceHeader2" parent="AppTheme">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
@@ -32,7 +38,7 @@
     </style>
 
     <style name="ColdStart" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowBackground">@drawable/splash_layout</item>
     </style>
 
 </resources>

@@ -7,22 +7,39 @@
 
         <variable
             name="activity"
-            type="com.shopemania.app.home.HomeActivity" />
+            type="com.mcsadhukhan.app.home.HomeActivity" />
     </data>
 
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/root_view"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F6F6F6"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/layout_content"
-            layout="@layout/activity_home_content"
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/root_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F6F6F6"
+            android:fitsSystemWindows="true">
+
+            <include
+                android:id="@+id/layout_content"
+                layout="@layout/activity_home_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_call"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/ic_call_24" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>
