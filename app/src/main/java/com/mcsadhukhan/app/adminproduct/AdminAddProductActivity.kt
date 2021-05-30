@@ -17,6 +17,8 @@ import com.mcsadhukhan.app.ViewModelFactory
 import com.mcsadhukhan.app.databinding.ActivityAdminAddProductBinding
 import com.mcsadhukhan.app.home.HomeViewModel
 import com.mcsadhukhan.app.model.Product
+import com.mcsadhukhan.app.util.ConstantHelper
+import com.mcsadhukhan.app.util.convertStringFormat
 import kotlinx.android.synthetic.main.activity_admin_add_product.*
 import kotlinx.android.synthetic.main.view_popup_checkbox.view.*
 import java.util.*
@@ -35,8 +37,12 @@ class AdminAddProductActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding.activity = this
+        val isUpdateProduct = intent.getBooleanExtra(ConstantHelper.BUNDLE_IS_ADD_PRODUCT, false)
+        val productDetail = intent.getSerializableExtra(ConstantHelper.BUNDLE_PRODUCT ) as Product?
         mBinding.apply {
+            activity = this@AdminAddProductActivity
+            product = productDetail
+            isEditProduct = isUpdateProduct
             etQuantity.setOnClickListener {
                 showSingleStringPopup(
                     arrayListOf("Tin", "Bottle", "Pouch"),
@@ -53,22 +59,30 @@ class AdminAddProductActivity : AppCompatActivity() {
 
             btnSubmit.setOnClickListener {
                 val product = Product()
-                product.epochTime = Calendar.getInstance().timeInMillis
+                val currentTime = Calendar.getInstance()
                 product.unit = etQuantity.text?.toString()
                 product.name = etName.text?.toString()
-                val price : HashMap<String,String> = hashMapOf(
-                    "epochTime" to product.epochTime.toString(),
+                product.lastUpdate = currentTime.convertStringFormat("dd-MMM-yyyy")
+                val price: HashMap<String, String> = hashMapOf(
+                    "epochTime" to currentTime.timeInMillis.toString(),
                     "price" to etPrice.text?.toString()!!,
-                    "time" to Calendar.getInstance().time.toString()
+                    "time" to product.lastUpdate!!
                 )
-                val list = ArrayList<HashMap<String,String>>()
                 product.priceList.clear()
                 product.priceList.add(price)
-                viewModel.addProductDetail(product)
+                if (isUpdateProduct && productDetail!=null) {
+                    product.id = productDetail.id
+                    viewModel.updateProductDetail(product).observe(this@AdminAddProductActivity, {
+                        finish()
+                    })
+
+                } else {
+                    viewModel.addProductDetail(product).observe(this@AdminAddProductActivity, {
+                        finish()
+                    })
+                }
 
             }
-
-
         }
     }
 

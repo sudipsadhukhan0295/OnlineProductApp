@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.databinding.ViewProductListBinding
 import com.mcsadhukhan.app.listener.OnImageClickListener
+import com.mcsadhukhan.app.listener.OnProductClickListener
 import com.mcsadhukhan.app.model.Product
 
 class ProductListAdapter(
     private val context: Context,
     private val productList: MutableList<Product>
 ) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
-    private lateinit var onImageClickListener: OnImageClickListener
+    private lateinit var onProductClickListener: OnProductClickListener
 
     private lateinit var mBinding: ViewProductListBinding
 
@@ -35,8 +36,8 @@ class ProductListAdapter(
 
     }
 
-    fun onClick(url:String) {
-        onImageClickListener.onImageClick(url)
+    fun onClick(product: Product) {
+        onProductClickListener.onClick(product)
 
     }
 
@@ -54,8 +55,8 @@ class ProductListAdapter(
         notifyDataSetChanged()
     }
 
-    fun setOnClickListener(onImageClickListener: OnImageClickListener) {
-        this.onImageClickListener = onImageClickListener
+    fun setOnClickListener(onProductClickListener: OnProductClickListener) {
+        this.onProductClickListener = onProductClickListener
     }
 
 

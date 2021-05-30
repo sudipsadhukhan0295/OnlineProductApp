@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".adminproduct.AdminAddProductActivity"></activity>
+        <activity android:name=".home.ProductDetailActivity"></activity>
+        <activity android:name=".adminproduct.AdminAddProductActivity" />
         <activity
             android:name=".adminproduct.ProductListActivity"
             android:label="Edit product list"

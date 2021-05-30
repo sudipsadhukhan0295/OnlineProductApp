@@ -25,6 +25,8 @@ object ConstantHelper {
     const val BUNDLE_LOGIN_USER_DETAIL = "loginUserDetail"
     const val BUNDLE_SELECTED_USER = "selectedUser"
     const val BUNDLE_PRODUCT_LIST = "productList"
+    const val BUNDLE_IS_ADD_PRODUCT = "addProduct"
+    const val BUNDLE_PRODUCT = "Product"
 
     const val  RC_SIGN_IN: Int = 1
 

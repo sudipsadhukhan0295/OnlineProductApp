@@ -22,7 +22,7 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
 
     }
 
-    fun getdashboardData(): MutableLiveData<ApiResponse<Dashboard>> {
+    fun getDashboardData(): MutableLiveData<ApiResponse<Dashboard>> {
 
         val data = MutableLiveData<ApiResponse<Dashboard>>()
         viewModelScope.launch {

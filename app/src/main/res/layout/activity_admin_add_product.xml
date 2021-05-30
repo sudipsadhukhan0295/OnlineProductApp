@@ -4,6 +4,14 @@
     <data>
 
         <variable
+            name="isEditProduct"
+            type="Boolean" />
+
+        <variable
+            name="product"
+            type="com.mcsadhukhan.app.model.Product" />
+
+        <variable
             name="activity"
             type="com.mcsadhukhan.app.adminproduct.AdminAddProductActivity" />
     </data>
@@ -37,10 +45,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView9">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
                 android:id="@+id/et_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:enabled="@{isEditProduct==true?false:true}"
+                android:inputType="text"
+                android:text="@{product.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,8 +69,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
+                android:enabled="@{isEditProduct==true?false:true}"
                 android:focusable="false"
-                android:inputType="text" />
+                android:inputType="text"
+                android:text="@{product.unit}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -75,17 +87,18 @@
             app:layout_constraintTop_toBottomOf="@+id/til_quantity">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_price"
-                android:inputType="text" />
+                android:imeOptions="actionDone"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_52dp"
             android:text="Add product"
-            android:id="@+id/btn_submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

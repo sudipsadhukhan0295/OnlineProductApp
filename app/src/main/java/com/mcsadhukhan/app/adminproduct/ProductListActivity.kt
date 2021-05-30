@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mcsadhukhan.app.App
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.databinding.ActivityProductListBinding
+import com.mcsadhukhan.app.fullscreen.FullScreenImageActivity
 import com.mcsadhukhan.app.home.ProductListAdapter
 import com.mcsadhukhan.app.listener.OnImageClickListener
+import com.mcsadhukhan.app.listener.OnProductClickListener
 import com.mcsadhukhan.app.model.Product
 import com.mcsadhukhan.app.util.BaseActivity
 import com.mcsadhukhan.app.util.ConstantHelper
@@ -50,9 +52,12 @@ class ProductListActivity : BaseActivity() {
         }
 
 
-        productListAdapter.setOnClickListener(object : OnImageClickListener{
-            override fun onImageClick(url: String) {
-
+        productListAdapter.setOnClickListener(object : OnProductClickListener{
+            override fun onClick(product: Product) {
+                val intent = Intent(applicationContext, AdminAddProductActivity::class.java)
+                intent.putExtra(ConstantHelper.BUNDLE_IS_ADD_PRODUCT, true)
+                intent.putExtra(ConstantHelper.BUNDLE_PRODUCT, product)
+                startActivity(intent)
             }
         })
 
