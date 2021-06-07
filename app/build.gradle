@@ -7,15 +7,15 @@ apply plugin: 'com.google.gms.google-services'
 def version = rootProject.ext
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.shopemania.app"
+        applicationId "com.mcsadhukhan.app"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,7 +38,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "androidx.appcompat:appcompat:$version.appCompactVersion"
     implementation "androidx.constraintlayout:constraintlayout:$version.constrainLayoutVersion"
     implementation "com.google.android.material:material:$version.materialVersion"
@@ -49,17 +48,21 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$version.coroutineVersion"
 
     implementation "com.github.bumptech.glide:glide:$version.glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$version.glideVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kapt "com.github.bumptech.glide:compiler:$version.glideVersion"
 
     implementation "com.google.code.gson:gson:$gsonVersion"
 
-    implementation "com.intuit.sdp:sdp-android:$sdpVersion"
-
     //Firebase
-    implementation "com.google.firebase:firebase-analytics:$firebaseAnalyticsVersion"
-    implementation "com.google.firebase:firebase-firestore-ktx:$firestoreVersion"
-    implementation "com.google.firebase:firebase-auth-ktx:$firebaseAuthVersion"
-    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

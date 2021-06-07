@@ -8,12 +8,57 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:89980109274:android:a3a8faf92d5751f4f740e3",
+        "android_client_info": {
+          "package_name": "com.mcsadhukhan.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89980109274-0v5sng4d4g2l7kts842ijkndlbugk9rf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzKEJQj2ybDBniLVOtPQP55R3YahNUkMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89980109274-0v5sng4d4g2l7kts842ijkndlbugk9rf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:89980109274:android:6ff3ec5022ddd88ff740e3",
         "android_client_info": {
           "package_name": "com.shopemania.app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "89980109274-6t76sqjgdcru9aa7n3aekri4ln14pbj7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shopemania.app",
+            "certificate_hash": "0a7b588077fbf89a14151c83a942d7f33740e4a4"
+          }
+        },
+        {
+          "client_id": "89980109274-qaj170iknnel3hecout7e4r9vk4hatk5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shopemania.app",
+            "certificate_hash": "de3c83d83a97665b98782c05eb7421a1f304b3c9"
+          }
+        },
         {
           "client_id": "89980109274-0v5sng4d4g2l7kts842ijkndlbugk9rf.apps.googleusercontent.com",
           "client_type": 3

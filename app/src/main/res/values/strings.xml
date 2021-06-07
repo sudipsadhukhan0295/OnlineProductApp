@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Shop-é-Mania</string>
+    <string name="app_name">M.C.Sadhukhan &amp; Co.</string>
     <string name="image">image</string>
     <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="email">Email</string>
+    <string name="phone_no">Phone No.</string>
+    <string name="name">Name</string>
+    <string name="signup">SignUp</string>
+    <string name="verification">Verification</string>
+    <string name="otp_has_sent_on_your_mobile_number_please_enter_in_below">OTP has sent on your mobile number. Please enter in below</string>
+    <string name="verify">Verify</string>
 </resources>
