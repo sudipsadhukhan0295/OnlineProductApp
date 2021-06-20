@@ -1,4 +1,4 @@
-package com.mcsadhukhan.app.customview;
+package com.mcsadhukhan.app.customview
 
 /*
 MIT License
@@ -51,6 +51,7 @@ import android.text.InputType.TYPE_CLASS_NUMBER
 import android.text.InputType.TYPE_CLASS_TEXT
 import android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
 import com.mcsadhukhan.app.R
+import kotlin.math.max
 
 
 /**
@@ -390,10 +391,10 @@ class Pinview @JvmOverloads constructor(
      *
      * @return the current focused pin view. It can be used to open softkeyboard manually.
      */
-    fun requestPinEntryFocus(): View? {
-        val currentTag = Math.max(0, indexOfCurrentFocus)
+    fun requestPinEntryFocus(): View {
+        val currentTag = max(0, indexOfCurrentFocus)
         val currentEditText = editTextList[currentTag]
-        currentEditText?.requestFocus()
+        currentEditText.requestFocus()
         openKeyboard()
         return currentEditText
     }

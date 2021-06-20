@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -15,12 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.ViewModelFactory
 import com.mcsadhukhan.app.databinding.ActivityAdminAddProductBinding
+import com.mcsadhukhan.app.databinding.ViewPopupCheckboxBinding
 import com.mcsadhukhan.app.home.HomeViewModel
 import com.mcsadhukhan.app.model.Product
 import com.mcsadhukhan.app.util.ConstantHelper
 import com.mcsadhukhan.app.util.convertStringFormat
-import kotlinx.android.synthetic.main.activity_admin_add_product.*
-import kotlinx.android.synthetic.main.view_popup_checkbox.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -39,15 +39,21 @@ class AdminAddProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val isUpdateProduct = intent.getBooleanExtra(ConstantHelper.BUNDLE_IS_ADD_PRODUCT, false)
         val productDetail = intent.getSerializableExtra(ConstantHelper.BUNDLE_PRODUCT ) as Product?
+        val productQuantityDetails = ConstantHelper.productDetail
         mBinding.apply {
             activity = this@AdminAddProductActivity
             product = productDetail
             isEditProduct = isUpdateProduct
-            etQuantity.setOnClickListener {
-                showSingleStringPopup(
-                    arrayListOf("Tin", "Bottle", "Pouch"),
-                    mBinding.etQuantity,
-                    "Product Quantity Type:"
+            etType.setOnClickListener {
+                showSingleStringPopup(productQuantityDetails.productUnit,
+                    mBinding.etType,
+                    "Product Type:"
+                )
+            }
+            etProductQuantity.setOnClickListener {
+                showSingleStringPopup(productQuantityDetails.productQuantity,
+                    mBinding.etProductQuantity,
+                    "Product Quantity:"
                 )
             }
 
@@ -60,7 +66,7 @@ class AdminAddProductActivity : AppCompatActivity() {
             btnSubmit.setOnClickListener {
                 val product = Product()
                 val currentTime = Calendar.getInstance()
-                product.unit = etQuantity.text?.toString()
+                product.unit = etType.text?.toString()
                 product.name = etName.text?.toString()
                 product.lastUpdate = currentTime.convertStringFormat("dd-MMM-yyyy")
                 val price: HashMap<String, String> = hashMapOf(
@@ -102,10 +108,10 @@ class AdminAddProductActivity : AppCompatActivity() {
 
     private fun showSingleStringPopup(value: ArrayList<String>, text: EditText, header: String) {
         val dialog = createDialog(this)
-        val view = layoutInflater.inflate(R.layout.view_popup_checkbox, null)
-        dialog.setContentView(view)
-        view.tv_content.text = header
-        view.rv_list.visibility = View.GONE
+        //val view = layoutInflater.inflate(R.layout.view_popup_checkbox, null)
+        val bind = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.view_popup_checkbox, null,false) as ViewPopupCheckboxBinding
+        bind.tvContent.text = header
+        bind.rvList.visibility = View.GONE
         value.forEach { i ->
             val textView = TextView(this)
             textView.text = i
@@ -121,7 +127,7 @@ class AdminAddProductActivity : AppCompatActivity() {
                 text.setText(textView.text)
                 dialog.dismiss()
             }
-            view.ll_view.addView(textView)
+            bind.llView.addView(textView)
         }
         dialog.show()
     }

@@ -35,7 +35,7 @@ class ProductPriceHistoryAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.binding?.apply {
-            tvPrice.text = productList[position]["price"]
+            tvPrice.text = "₹${productList[position]["price"]}"
             tvDate.text = productList[position]["time"]
         }
     }

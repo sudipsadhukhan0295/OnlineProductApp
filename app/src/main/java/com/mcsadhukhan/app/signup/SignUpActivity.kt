@@ -2,11 +2,13 @@ package com.mcsadhukhan.app.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.emi.manager.network.ApiResponse
+import com.mcsadhukhan.app.network.ApiResponse
 import com.google.firebase.auth.*
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.ViewModelFactory
@@ -15,6 +17,7 @@ import com.mcsadhukhan.app.home.HomeActivity
 import com.mcsadhukhan.app.model.User
 import com.mcsadhukhan.app.util.BaseActivity
 import com.mcsadhukhan.app.util.ConstantHelper
+import com.mcsadhukhan.app.util.hideKeyboard
 
 
 class SignUpActivity : BaseActivity(), OtpVerificationBottomSheet.ItemClickListener {
@@ -49,6 +52,7 @@ class SignUpActivity : BaseActivity(), OtpVerificationBottomSheet.ItemClickListe
                     if (response.exception == null) {
                         if (response.responseBody?.uid != null) {
                             otpDialog.dismiss()
+                            isShowProgressbar.set(true)
                             val credential =
                                 GoogleAuthProvider.getCredential(user.gmailIdToken, null)
                             viewModel.linkGoogleAuth(credential)
@@ -107,6 +111,22 @@ class SignUpActivity : BaseActivity(), OtpVerificationBottomSheet.ItemClickListe
         viewModel = ViewModelProvider(this, ViewModelFactory(this)).get(SignUpViewModel::class.java)
         user = intent.getSerializableExtra(ConstantHelper.BUNDLE_LOGIN_USER_DETAIL) as User
         viewModel.userLiveData.observe(this, otpObserver)
+
+        mBinding.etPhoneNo.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (mBinding.etPhoneNo.text!=null && mBinding.etPhoneNo.text?.length==10){
+                    this@SignUpActivity.hideKeyboard()
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
 
     }
 

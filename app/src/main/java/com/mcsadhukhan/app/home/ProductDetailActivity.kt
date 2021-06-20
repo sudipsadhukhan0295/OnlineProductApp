@@ -1,11 +1,13 @@
 package com.mcsadhukhan.app.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.databinding.ActivityProductDetailBinding
 import com.mcsadhukhan.app.databinding.ActivityProductListBinding
+import com.mcsadhukhan.app.fullscreen.FullScreenImageActivity
 import com.mcsadhukhan.app.model.Product
 import com.mcsadhukhan.app.util.BaseActivity
 import com.mcsadhukhan.app.util.ConstantHelper
@@ -30,10 +32,13 @@ class ProductDetailActivity : BaseActivity() {
                 this.product = product
                 rvProductPriceList.adapter = productListAdapter
                 productListAdapter.addAll(product.priceList)
-
             }
-
         }
+    }
 
+    fun openImage(imageUrl:String){
+        val intent = Intent(this,FullScreenImageActivity::class.java)
+        intent.putExtra(ConstantHelper.BUNDLE_IMAGE_URL,imageUrl)
+        startActivity(intent)
     }
 }

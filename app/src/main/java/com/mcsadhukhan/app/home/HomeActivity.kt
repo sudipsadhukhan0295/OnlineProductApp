@@ -1,5 +1,6 @@
 package com.mcsadhukhan.app.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,14 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.emi.manager.network.ApiResponse
+import com.mcsadhukhan.app.network.ApiResponse
 import com.mcsadhukhan.app.App
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.ViewModelFactory
 import com.mcsadhukhan.app.adminproduct.ProductListActivity
 import com.mcsadhukhan.app.databinding.ActivityHomeBinding
-import com.mcsadhukhan.app.fullscreen.FullScreenImageActivity
-import com.mcsadhukhan.app.listener.OnImageClickListener
 import com.mcsadhukhan.app.listener.OnProductClickListener
 import com.mcsadhukhan.app.model.Dashboard
 import com.mcsadhukhan.app.model.Product
@@ -51,6 +50,9 @@ class HomeActivity : BaseActivity() {
         if (it.exception == null) {
             if (it.responseBody != null) {
                 dashboard = it.responseBody
+                if (dashboard?.productDetail != null) {
+                    ConstantHelper.productDetail = dashboard?.productDetail!!
+                }
                 val admin = dashboard?.adminNumber
                 val phoneNumber = App.firebaseAuth.currentUser?.phoneNumber
                 if (admin != null) {
@@ -62,16 +64,16 @@ class HomeActivity : BaseActivity() {
                 val mustardOil = dashboard?.mustardOil?.get(0)
                 val refinedOil = dashboard?.refinedOil?.get(0)
                 mBinding.layoutContent.apply {
-                    tvMoilPrice.text = "Price: Rs.${mustardOil?.get("price") as String}/KG"
-                    tvRoilPrice.text = "Price: Rs.${refinedOil?.get("price") as String}/KG"
+                    tvMoilPrice.text = "Price: Rs.${mustardOil?.get("price") as String}/${mustardOil.get("unit") as String}"
+                    tvRoilPrice.text = "Price: Rs.${refinedOil?.get("price") as String}/${mustardOil.get("unit") as String}"
                 }
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setSupportActionBar(mBinding.layoutContent.tbMain.tbMain)
         mBinding.activity = this
         viewModel = ViewModelProvider(this, ViewModelFactory(this)).get(HomeViewModel::class.java)
         viewModel.getDashboardData().observe(this, dashboardObserver)
@@ -79,27 +81,33 @@ class HomeActivity : BaseActivity() {
 
         mBinding.apply {
 
-            val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            layoutManager.gapStrategy =
-                StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
-            layoutContent.rvList.layoutManager = layoutManager
-            layoutContent.rvList.setHasFixedSize(true)
+            layoutContent.apply {
+                val layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                layoutManager.gapStrategy =
+                    StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+                rvList.layoutManager = layoutManager
+                rvList.setHasFixedSize(true)
+                val userDetail = App.firebaseAuth.currentUser
 
-
-            productListAdapter = ProductListAdapter(this@HomeActivity, mutableListOf())
-
-            layoutContent.rvList.adapter = productListAdapter
-            viewModel.getProductList().observe(this@HomeActivity, productListObserver)
-
-            productListAdapter.setOnClickListener(object : OnProductClickListener {
-                override fun onClick(product: Product) {
-                    val intent = Intent(applicationContext, ProductDetailActivity::class.java)
-                    intent.putExtra(ConstantHelper.BUNDLE_PRODUCT, product)
-                    startActivity(intent)
-
+                if (userDetail?.displayName != null) {
+                    tvHelloUser.text = "Hello ${userDetail.displayName!!.split(" ")[0]}"
                 }
 
-            })
+
+                productListAdapter = ProductListAdapter(this@HomeActivity, mutableListOf())
+
+                rvList.adapter = productListAdapter
+                viewModel.getProductList().observe(this@HomeActivity, productListObserver)
+
+                productListAdapter.setOnClickListener(object : OnProductClickListener {
+                    override fun onClick(product: Product) {
+                        val intent = Intent(applicationContext, ProductDetailActivity::class.java)
+                        intent.putExtra(ConstantHelper.BUNDLE_PRODUCT, product)
+                        startActivity(intent)
+                    }
+                })
+            }
 
             fabCall.setOnClickListener {
                 if (isUserAdmin) {

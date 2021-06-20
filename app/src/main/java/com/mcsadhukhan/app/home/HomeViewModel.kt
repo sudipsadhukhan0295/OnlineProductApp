@@ -3,7 +3,7 @@ package com.mcsadhukhan.app.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.emi.manager.network.ApiResponse
+import com.mcsadhukhan.app.network.ApiResponse
 import com.mcsadhukhan.app.model.Dashboard
 import com.mcsadhukhan.app.model.Product
 import kotlinx.coroutines.launch

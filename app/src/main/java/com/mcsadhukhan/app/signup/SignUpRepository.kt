@@ -3,9 +3,12 @@ package com.mcsadhukhan.app.signup
 import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.emi.manager.network.ApiResponse
+import com.mcsadhukhan.app.network.ApiResponse
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.ktx.Firebase
 import com.mcsadhukhan.app.App
 import com.mcsadhukhan.app.login.LoginRepository
 import com.mcsadhukhan.app.model.User
@@ -96,7 +99,6 @@ class SignUpRepository {
 
         return withContext(ioDispatcher) {
             try {
-                //userDetail.reminderDayOfMonth = ConstantHelper.DEFAULT_EMI_REMINDER_DATE
                 val deviceId: String? = FunctionHelper.getDeviceId(activity)
                 val deviceToken = LoginRepository().getDeviceToken()
                 if (deviceToken.responseBody == null) return@withContext ApiResponse<Boolean>(deviceToken.exception)
@@ -104,6 +106,7 @@ class SignUpRepository {
                     userDetail.deviceToken[deviceId] = deviceToken.responseBody!!
                     userDetail.deviceLastLoginTime[deviceId] = FunctionHelper.currentDateTime!!
                 }
+                Firebase.auth.currentUser?.updateProfile(userProfileChangeRequest { displayName = userDetail.name })?.await()
 
                 db.collection(ConstantHelper.COLLECTION_USERS).document(uid).set(userDetail).await()
                 return@withContext ApiResponse(true)

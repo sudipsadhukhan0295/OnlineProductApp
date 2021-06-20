@@ -1,5 +1,7 @@
 package com.mcsadhukhan.app.util
 
+import com.mcsadhukhan.app.model.ProductDetail
+
 object ConstantHelper {
 
     const val BUNDLE_IMAGE_URL = "imageUrl"
@@ -31,4 +33,6 @@ object ConstantHelper {
     const val  RC_SIGN_IN: Int = 1
 
     const val DEFAULT_EMI_REMINDER_DATE = 5
+
+    var productDetail = ProductDetail()
 }

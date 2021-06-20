@@ -6,12 +6,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFF6F6"
         tools:context=".home.HomeActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_top"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:id="@+id/cl_top"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,37 +44,81 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/_16dp"
-                android:layout_marginVertical="@dimen/_24dp"
+                android:layout_marginTop="@dimen/_24dp"
+                android:layout_marginBottom="72dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginVertical="@dimen/_8dp"
+                    android:background="@drawable/logo_corner_rounded_background"
+                    android:padding="@dimen/_8dp"
+                    android:visibility="gone">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_32dp"
+                        android:layout_height="@dimen/_32dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_logo" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_24dp">
+
+                    <TextView
+                        android:id="@+id/tv_hello_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/mediumEmphasis"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Hello User" />
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/shapeableImageView"
+                        android:layout_width="@dimen/_28dp"
+                        android:layout_height="@dimen/_28dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintStart_toEndOf="@+id/tv_hello_user"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_profile_pic" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:letterSpacing=".05"
-                    android:text="Market Price"
-                    android:textColor="#1C1A1A"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:letterSpacing=".025"
+                    android:text="Today's Market Price"
+                    android:textColor="@color/mediumEmphasis"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
                     android:padding="@dimen/_8dp"
-                    android:weightSum="2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6">
+                    android:weightSum="2">
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
@@ -83,21 +128,17 @@
                         android:layout_marginStart="@dimen/_4dp"
                         android:layout_marginEnd="@dimen/_4dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape_gradiant_red"
+                        android:background="@drawable/shape_rounded_corner_white"
                         android:elevation="@dimen/_2dp"
                         android:gravity="start"
                         android:orientation="vertical"
-                        android:padding="@dimen/_8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent=".5">
+                        android:padding="@dimen/_8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Mustard Oil Loose"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/mediumEmphasis"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -107,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8dp"
                             android:text="Price"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/highEmphasis"
                             tools:text="Price : Rs. 180 per kg" />
 
                     </LinearLayout>
@@ -120,7 +161,7 @@
                         android:layout_marginStart="@dimen/_4dp"
                         android:layout_marginEnd="@dimen/_4dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape_gradiant_green"
+                        android:background="@drawable/shape_rounded_corner_white"
                         android:elevation="@dimen/_2dp"
                         android:orientation="vertical"
                         android:padding="@dimen/_8dp"
@@ -133,7 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Soya Refined Oil Loose"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/mediumEmphasis"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -143,19 +184,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8dp"
                             android:text="Price"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/highEmphasis"
                             tools:text="Price : Rs. 180 per kg" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16dp"
                     android:text="Product Name With Price"
-                    android:textColor="#99000000"
-                    android:textSize="18sp"
+                    android:textColor="@color/mediumEmphasis"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

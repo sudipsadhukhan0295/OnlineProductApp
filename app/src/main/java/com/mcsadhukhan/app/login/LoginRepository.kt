@@ -2,7 +2,7 @@ package com.mcsadhukhan.app.login
 
 import android.app.Activity
 import android.util.Log
-import com.emi.manager.network.ApiResponse
+import com.mcsadhukhan.app.network.ApiResponse
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -58,7 +58,7 @@ class LoginRepository {
         }
     }
 
-    public suspend fun getDeviceToken(): ApiResponse<String> {
+    suspend fun getDeviceToken(): ApiResponse<String> {
         return withContext(Dispatchers.IO) {
             try {
                 val result = FirebaseMessaging.getInstance().token.await()
