@@ -5,19 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.annotation.Nullable
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.customview.Pinview
-import kotlinx.android.synthetic.main.view_otp.*
-import kotlinx.android.synthetic.main.view_otp.view.*
+import com.mcsadhukhan.app.databinding.ViewOtpBinding
 
 
 class OtpVerificationBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
     private var mListener: ItemClickListener? = null
-    private lateinit var mView: View
+    private lateinit var mBinding: ViewOtpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,19 +26,22 @@ class OtpVerificationBottomSheet : BottomSheetDialogFragment(), View.OnClickList
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        mView = inflater.inflate(R.layout.view_otp, container, false)
+        mBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.view_otp, container, false
+        ) as ViewOtpBinding
         isProgress(false)
-        return mView
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.btn_verify).setOnClickListener(this)
-        view.et_otp.setPinViewEventListener(object : Pinview.PinViewEventListener {
+        mBinding.btnVerify.setOnClickListener(this)
+        mBinding.etOtp.setPinViewEventListener(object : Pinview.PinViewEventListener {
             override fun onDataEntered(pinview: Pinview, fromUser: Boolean) {
-                view.btn_verify.isEnabled = pinview.value.length==6
+                mBinding.btnVerify.isEnabled = pinview.value.length == 6
             }
         })
     }
@@ -60,21 +62,21 @@ class OtpVerificationBottomSheet : BottomSheetDialogFragment(), View.OnClickList
 
     fun isProgress(isProgress: Boolean) {
         if (isProgress) {
-            mView.pb_verify.visibility = View.VISIBLE
-            mView.btn_verify.visibility = View.GONE
+            mBinding.pbVerify.visibility = View.VISIBLE
+            mBinding.btnVerify.visibility = View.GONE
         } else {
-            mView.pb_verify.visibility = View.GONE
-            mView.btn_verify.visibility = View.VISIBLE
+            mBinding.pbVerify.visibility = View.GONE
+            mBinding.btnVerify.visibility = View.VISIBLE
         }
     }
 
     override fun onClick(view: View) {
-        mListener!!.onItemClick(et_otp.value)
+        mListener!!.onItemClick(mBinding.etOtp.value)
     }
 
     fun errorMessage(msg: String) {
-        mView.tv_error_message.text = msg
-        mView.tv_error_message.visibility = View.VISIBLE
+        mBinding.tvErrorMessage.text = msg
+        mBinding.tvErrorMessage.visibility = View.VISIBLE
     }
 
     interface ItemClickListener {

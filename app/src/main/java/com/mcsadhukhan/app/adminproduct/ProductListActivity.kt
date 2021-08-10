@@ -3,14 +3,10 @@ package com.mcsadhukhan.app.adminproduct
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.mcsadhukhan.app.App
 import com.mcsadhukhan.app.R
 import com.mcsadhukhan.app.databinding.ActivityProductListBinding
-import com.mcsadhukhan.app.fullscreen.FullScreenImageActivity
 import com.mcsadhukhan.app.home.ProductListAdapter
-import com.mcsadhukhan.app.listener.OnImageClickListener
 import com.mcsadhukhan.app.listener.OnProductClickListener
 import com.mcsadhukhan.app.model.Product
 import com.mcsadhukhan.app.util.BaseActivity

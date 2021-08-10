@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,9 +18,7 @@
             type="com.mcsadhukhan.app.adminproduct.AdminAddProductActivity" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/_16dp"
@@ -54,18 +54,43 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_quantity"
+            android:id="@+id/til_type"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12dp"
-            android:hint="Product quantity"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="Product Type"
+            app:layout_constraintEnd_toStartOf="@+id/til_product_quantity"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent=".48"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toBottomOf="@+id/til_name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_quantity"
+                android:id="@+id/et_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:enabled="@{isEditProduct==true?false:true}"
+                android:focusable="false"
+                android:inputType="text"
+                android:text="@{product.unit}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_product_quantity"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12dp"
+            android:hint="Product Quantity"
+            app:layout_constraintWidth_percent=".48"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_product_quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
@@ -84,7 +109,7 @@
             android:hint="Product Price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/til_quantity">
+            app:layout_constraintTop_toBottomOf="@+id/til_type">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_price"

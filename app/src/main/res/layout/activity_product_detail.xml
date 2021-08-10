@@ -21,27 +21,41 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#F6F6F6">
+            android:layout_height="match_parent">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#FFF6F6"
                 tools:context=".home.ProductDetailActivity">
+
+                <ImageView
+                    android:layout_width="@dimen/_28dp"
+                    android:layout_height="@dimen/_28dp"
+                    android:layout_marginStart="@dimen/_16dp"
+                    android:onClick="@{()->activity.finish()}"
+                    android:src="@drawable/ic_back_ios"
+                    android:paddingStart="@dimen/_8dp"
+                    android:paddingVertical="@dimen/_4dp"
+                    android:background="@drawable/shape_brown_border_rectangle"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
+                    app:layout_constraintEnd_toStartOf="@+id/textView12"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView12" />
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_16dp"
                     android:layout_marginTop="@dimen/_24dp"
                     android:letterSpacing=".04"
                     android:text="Product details"
-                    android:textAllCaps="true"
-                    android:textColor="#CC000000"
+                    android:textColor="@color/mediumEmphasis"
                     android:textSize="16sp"
-                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +63,8 @@
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16dp"
+                    android:layout_marginTop="@dimen/_28dp"
+                    android:layout_marginHorizontal="@dimen/_16dp"
                     android:background="@drawable/shape_gradiant_green"
                     android:orientation="vertical"
                     android:paddingVertical="@dimen/_28dp"
@@ -64,6 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:background="@android:color/white"
+                        android:onClick="@{()->activity.openImage(product.imageUrl)}"
                         android:scaleType="fitCenter"
                         app:imageUrl="@{product.imageUrl}"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +106,7 @@
                         android:layout_marginEnd="@dimen/_40dp"
                         android:text="@{product.name+` (`+product.unit+`)`}"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/textView10"
                         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{`₹`+product.priceList[0].price}"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -115,9 +131,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/_16dp"
-                    android:background="@android:color/white"
+                    android:background="@drawable/shape_rounded_top_corner"
                     android:paddingTop="@dimen/_16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +156,6 @@
                         android:id="@+id/rv_product_price_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginHorizontal="@dimen/_8dp"
                         android:layout_marginVertical="@dimen/_16dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"

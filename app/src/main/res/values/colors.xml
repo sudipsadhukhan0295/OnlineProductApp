@@ -3,4 +3,7 @@
     <color name="colorPrimary">#ED0000</color>
     <color name="colorPrimaryDark">#6E1010</color>
     <color name="colorAccent">#66BB6A</color>
+    <color name="highEmphasis">#CC000000</color>
+    <color name="mediumEmphasis">#99000000</color>
+    <color name="backgroundGrey">#F6F6F6</color>
 </resources>

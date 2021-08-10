@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:overScrollMode">never</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:fontFamily">@font/notosansjp_medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="TextTitle" parent="AppTheme">

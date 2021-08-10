@@ -7,7 +7,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.emi.manager.network.ApiResponse
+import com.mcsadhukhan.app.network.ApiResponse
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -28,17 +28,19 @@ import com.mcsadhukhan.app.util.BaseActivity
 import com.mcsadhukhan.app.util.ConstantHelper
 import com.mcsadhukhan.app.util.ConstantHelper.RC_SIGN_IN
 import com.mcsadhukhan.app.util.ConstantHelper.REQUESTIDTOKEN
-import kotlinx.android.synthetic.main.activity_login.*
-
 
 class LoginActivity : BaseActivity() {
-    private val TAG = LoginActivity::class.java.name
+
+    companion object {
+        private val TAG = LoginActivity::class.java.name
+    }
+
     private lateinit var mBinding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
-    var user = User()
-    var firebaseAuth = FirebaseAuth.getInstance()
-    lateinit var credential:AuthCredential
-    lateinit var mGoogleSignInClient: GoogleSignInClient
+    private var user = User()
+    private var firebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var credential: AuthCredential
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     private val gmailLoginObserver = Observer<ApiResponse<Boolean>> { response ->
         closeLoader()
@@ -52,36 +54,30 @@ class LoginActivity : BaseActivity() {
             } else {
                 Log.e(TAG, response.exception.toString())
                 firebaseAuth.signOut()
-                errorSnackbar(rootView)
+                errorSnackbar(mBinding.rootView)
             }
-        }else{
-            closeLoader()
-            errorSnackbar(rootView)
+        } else {
+            errorSnackbar(mBinding.rootView)
         }
     }
 
     private val checkIfUserExistObserver = Observer<ApiResponse<Boolean>> { response ->
+        closeLoader()
         if (response != null) {
             if (response.exception == null) {
                 mGoogleSignInClient.signOut()
-
                 if (response.responseBody!!) {
                     val intent = Intent(this, SignUpActivity::class.java)
-                    intent.putExtra(ConstantHelper.BUNDLE_LOGIN_USER_DETAIL,user)
+                    intent.putExtra(ConstantHelper.BUNDLE_LOGIN_USER_DETAIL, user)
                     startActivity(intent)
-                    closeLoader()
                 } else {
-                    viewModel.loginUsingGmail(credential).observe(this,gmailLoginObserver)
+                    viewModel.loginUsingGmail(credential).observe(this, gmailLoginObserver)
                 }
+            } else {
+                Log.e(TAG, response.exception.toString())
             }
-            else{
-                closeLoader()
-                Log.e(TAG,response.exception.toString())
-            }
-        }
-        else{
-            closeLoader()
-            errorSnackbar(rootView)
+        } else {
+            errorSnackbar(mBinding.rootView)
         }
     }
 
@@ -95,7 +91,7 @@ class LoginActivity : BaseActivity() {
 
         viewModel = ViewModelProvider(this, ViewModelFactory(this)).get(LoginViewModel::class.java)
         mBinding =
-            DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
+            DataBindingUtil.setContentView(this, R.layout.activity_login)
         mBinding.activity = this
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(REQUESTIDTOKEN)
@@ -114,8 +110,8 @@ class LoginActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            progressbar.visibility=View.VISIBLE
-            signInButton.visibility=View.INVISIBLE
+            mBinding.progressbar.visibility = View.VISIBLE
+            mBinding.signInButton.visibility = View.INVISIBLE
             val result =
                 Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result?.isSuccess!!) {
@@ -133,16 +129,16 @@ class LoginActivity : BaseActivity() {
             user.name = account.displayName.toString()
             user.gmailIdToken = account.idToken.toString()
             credential = GoogleAuthProvider.getCredential(user.gmailIdToken, null)
-            viewModel.checkIfEmailExist( user.socialMediaId!!)
+            viewModel.checkIfEmailExist(user.socialMediaId!!)
                 .observe(this, checkIfUserExistObserver)
         } catch (e: ApiException) {
             Log.w(TAG, "signInResult:failed code=" + e.statusCode)
         }
     }
 
-    private fun closeLoader(){
-        progressbar.visibility=View.GONE
-        signInButton.visibility=View.VISIBLE
+    private fun closeLoader() {
+        mBinding.progressbar.visibility = View.GONE
+        mBinding.signInButton.visibility = View.VISIBLE
     }
 
 }
